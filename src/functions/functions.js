@@ -49,6 +49,7 @@ const addTrade = function (name, rising, date, place, category, type) {
     updateBalance(rising, type)
 }
 
+//Incremente ou decremente la current_balance selon le type de la transaction
 const updateBalance = function (rising, type) {
     if (type === TRANSACTION_TYPE.ENTREE){ 
     currentBalance += rising
@@ -60,10 +61,12 @@ const updateBalance = function (rising, type) {
     }
 }
 
+//Ajoute un budget
 const addBudget = function (budget) {
     setOnLocalStorage(LOCAL_STORAGE_KEYS.BUDGET, budget, true)
 }
 
+//Calcule les dépenses par mois
 const calculateExpenseOfMonth = function (){
 
     const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
@@ -78,14 +81,32 @@ const calculateExpenseOfMonth = function (){
     setOnLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH, expense_month || 0)
 }
 
+const sortTrades = function (trades, sort) {
+    let tradesSorted = []
+    trades.forEach(trade => {
+        if (trade.category.toLowerCase().includes(sort.toLowerCase())) {
+            tradesSorted.push(trade)
+        }
+    });
+    return tradesSorted
+}
+
+const searchOnTrades = function (trades, contain){
+    let tradesSorted = []
+    trades.forEach(trade => {
+        if (trade.name.toLowerCase().includes(contain.toLowerCase())) {
+            tradesSorted.push(trade)
+        }
+    });
+    return tradesSorted
+}
+
 // Initialisation
 if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE)) {
     setOnLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE, 0);
     currentBalance = getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE);
-    console.log("currentBalance créé : ", currentBalance);
 } else {
     currentBalance = getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE);
-    console.log("currentBalance déjà prêt : ", currentBalance);
 }
 
 if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING)) {
@@ -104,3 +125,5 @@ calculateExpenseOfMonth()
 // console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING))
 // console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE))
 // console.log(expense_month)
+// console.log(sortTrades(trading, "salaire"))
+// console.log(searchOnTrades(trading, "bd"))
