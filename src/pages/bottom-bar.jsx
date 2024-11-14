@@ -1,4 +1,7 @@
-import { Home, Search, User } from "lucide-react";
+import { Home, Search, User, CirclePlus } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+
 
 export default function Component() {
   return (
@@ -15,15 +18,16 @@ export default function Component() {
             </a>
           </li>
           <li>
-            <a
-              href="#"
-              className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Search className="h-6 w-6" />
-              <span className="text-xs mt-1">Recherche</span>
-            </a>
-          </li>
-          <li>
+      <NavLink
+        to="/addForm"
+        className="
+          flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+      >
+        <CirclePlus className="h-6 w-6" />
+        <span className="text-xs mt-1">Ajouter une transaction</span>
+      </NavLink>
+    </li>
+    <li>
             <a
               href="#"
               className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
