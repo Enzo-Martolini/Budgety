@@ -15,7 +15,8 @@ const TRANSACTION_TYPE = {
 
 let trading;
 let currentBalance;
-let budget;
+let budget = 0;
+let expense_month = 0;
 
 // Fonctions
 
@@ -63,6 +64,20 @@ const addBudget = function (budget) {
     setOnLocalStorage(LOCAL_STORAGE_KEYS.BUDGET, budget, true)
 }
 
+const calculateExpenseOfMonth = function (){
+
+    const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+    let tradeOfMonth = getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING)
+    let sorties = tradeOfMonth.filter(trade => trade.type === "sortie");
+    sorties.forEach(sortie => {
+        if (sortie.date < lastDayOfMonth && sortie.date > firstDayOfMonth) {
+            expense_month += parseInt(sortie.rising);
+        }
+    });
+    setOnLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH, expense_month || 0)
+}
+
 // Initialisation
 if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE)) {
     setOnLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE, 0);
@@ -80,13 +95,12 @@ if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING)) {
     trading = getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING);
 }
 
-if (!getFromLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH)) {
-    setOnLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH, 0);
-    expense_month = getFromLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH);
-} else {
-    trading = getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING);
-}
+calculateExpenseOfMonth()
 
-addTrade("Salaire", 1200, Date.now(), "Marseille", "salaire", TRANSACTION_TYPE.SORTIE)
-console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING))
-console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE))
+
+//DEBUG
+// addBudget(2500)
+// addTrade("Salaire", 8200, Date.now(), "Marseille", "salaire", TRANSACTION_TYPE.ENTREE)
+// console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING))
+// console.log(getFromLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE))
+// console.log(expense_month)
