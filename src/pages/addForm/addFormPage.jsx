@@ -1,11 +1,18 @@
-import { ChartContainer } from "@/components/ui/chart";
-
+import { ChartForm } from "./chartForm";
+import { FormTransaction } from "./form";
 
 export const AddTransaction = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-bold mb-4">Ajouter une transaction</h1>
-      <ChartContainer />
-    </div>
+    <>
+      <div >
+        <div className="grid lg:grid-cols-2 m-7">
+         <ChartForm />
+        </div>
+      <div className="grid lg:grid-cols-2 m-7">
+        <FormTransaction />
+      </div>
+      </div>
+    </>
   );
 };
+

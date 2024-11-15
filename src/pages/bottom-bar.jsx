@@ -1,5 +1,5 @@
 import { Home, Search, User, CirclePlus } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 
@@ -18,14 +18,14 @@ export default function Component() {
             </a>
           </li>
           <li>
-      <NavLink
+      <Link
         to="/addForm"
         className="
           flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
       >
         <CirclePlus className="h-6 w-6" />
         <span className="text-xs mt-1">Ajouter une transaction</span>
-      </NavLink>
+      </Link>
     </li>
     <li>
             <a
