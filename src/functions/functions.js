@@ -47,6 +47,7 @@ const addTrade = function (name, rising, date, place, category, type) {
     tradeLocal.push(newTrade);
     setOnLocalStorage(LOCAL_STORAGE_KEYS.TRADING, tradeLocal); 
     updateBalance(rising, type)
+    calculateExpenseOfMonth()
 }
 
 //Incremente ou decremente la current_balance selon le type de la transaction
