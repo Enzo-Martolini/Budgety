@@ -5,22 +5,22 @@ export const HomePage = () => {
   return (
     <div className="grid lg:grid-cols-2 m-7">
       <Chart />
-      <CardTransaction name="Transaction" price={1650.84} symbole="€" />
+      <CardTransaction type="entrée" name="Transaction" price={1650.84} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-650} symbole="€" />
+      <CardTransaction type="sortie" name="Transaction" price={-650} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-124.56} symbole="€" />
+      <CardTransaction type="sortie" name="Transaction" price={-124.56} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-59.99} symbole="€" />
+      <CardTransaction type="sortie" name="Transaction" price={-59.99} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={100} symbole="€" />
+      <CardTransaction type="entrée" name="Transaction" price={100} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-9.90} symbole="€" />
+      <CardTransaction type="sortie" name="Transaction" price={-9.90} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-1.99} symbole="€" />
+      <CardTransaction type="sortie" name="Transaction" price={-1.99} symbole="€" />
       <br></br>
-      <CardTransaction name="Transaction" price={-32.50} symbole="€" />
-      <br></br> 
+      <CardTransaction type="sortie" name="Transaction" price={-32.50} symbole="€" />
+      <br></br>
     </div>
   );
 };
