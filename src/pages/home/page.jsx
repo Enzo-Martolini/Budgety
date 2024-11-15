@@ -11,10 +11,12 @@ export const HomePage = () => {
       {trading.map((trade, index) =>( 
         <>
         <CardTransaction name={trade.name} price={trade.rising} symbole="€" key={index}/>
-        </>)
+        <br></br>
+        <br></br> 
+        </>
+        )
       )}
-      <br></br>
-      <br></br> 
+
     </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { Home, Search, User } from "lucide-react";
+import { Plus, PieChart, List } from "lucide-react";
 
 export default function Component() {
   return (
@@ -10,8 +10,7 @@ export default function Component() {
               href="#"
               className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Home className="h-6 w-6" />
-              <span className="text-xs mt-1">Accueil</span>
+              <List className="h-6 w-6" />
             </a>
           </li>
           <li>
@@ -19,8 +18,7 @@ export default function Component() {
               href="#"
               className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Search className="h-6 w-6" />
-              <span className="text-xs mt-1">Recherche</span>
+              <PieChart className="h-6 w-6" />
             </a>
           </li>
           <li>
@@ -28,8 +26,7 @@ export default function Component() {
               href="#"
               className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
             >
-              <User className="h-6 w-6" />
-              <span className="text-xs mt-1">Profil</span>
+              <Plus className="h-6 w-6" />
             </a>
           </li>
         </ul>
