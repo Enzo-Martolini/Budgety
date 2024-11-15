@@ -4,15 +4,16 @@ import { FormTransaction } from "./form";
 export const AddTransaction = () => {
   return (
     <>
-      <div >
-        <div className="grid lg:grid-cols-2 m-7">
-         <ChartForm />
+      <div className="sm:m-4 flex-col items-center justify-center lg:flex items-center">
+        <div>
+          <ChartForm />
         </div>
-      <div className="grid lg:grid-cols-2 m-7">
-        <FormTransaction />
-      </div>
+        <div className="w-full lg:w-1/2 lg:max-w-none">
+          <FormTransaction />
+        </div>
       </div>
     </>
   );
 };
+
 

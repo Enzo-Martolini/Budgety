@@ -1,14 +1,14 @@
 import { TRADING } from './classes.js';
 
-// Constantes et letiables
-const LOCAL_STORAGE_KEYS = {
+// export constantes et letiables
+export const LOCAL_STORAGE_KEYS = {
     CURRENT_BALANCE: "currentBalance",
     TRADING: "trading",
     BUDGET: "budget",
     EXPENSE_MONTH: "month_expense"
 };
 
-const TRANSACTION_TYPE = {
+export const TRANSACTION_TYPE = {
     ENTREE: "entrée",
     SORTIE: "sortie"
 };
@@ -21,8 +21,8 @@ let expense_month = 0;
 // Fonctions
 
 // Récupère une valeur dans le localStorage
-const getFromLocalStorage = function (key) {
-    const data = localStorage.getItem(key);
+export const getFromLocalStorage = function (key) {
+     const data = localStorage.getItem(key);
     if (data !== null) {
         return JSON.parse(data); // Parse la chaîne JSON en objet JavaScript
     } else {
@@ -32,7 +32,7 @@ const getFromLocalStorage = function (key) {
 }
 
 // Modifie une valeur dans le localStorage, ou crée un objet
-const setOnLocalStorage = function (key, value, modify = true) {
+export const setOnLocalStorage = function (key, value, modify = true) {
     if (localStorage.getItem(key) !== null && !modify) {
         console.error("La clé existe déjà dans le local storage");
     } else {
@@ -41,20 +41,20 @@ const setOnLocalStorage = function (key, value, modify = true) {
 }
 
 // Fonction pour ajouter un nouveau trade
-const addTrade = function (name, rising, date, place, category, type) {
-    const newTrade = new TRADING(name, rising, date, place, category, type);
+export const addTrade = function (name, rising, date, place, category, type) {
+     const newTrade = new TRADING(name, rising, date, place, category, type);
     let tradeLocal = getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING);
     tradeLocal.push(newTrade);
-    setOnLocalStorage(LOCAL_STORAGE_KEYS.TRADING, tradeLocal); 
+    setOnLocalStorage(LOCAL_STORAGE_KEYS.TRADING, tradeLocal);
     updateBalance(rising, type)
     calculateExpenseOfMonth()
 }
 
 //Incremente ou decremente la current_balance selon le type de la transaction
-const updateBalance = function (rising, type) {
-    if (type === TRANSACTION_TYPE.ENTREE){ 
-    currentBalance += rising
-    setOnLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE, currentBalance, true)
+export const updateBalance = function (rising, type) {
+    if (type === TRANSACTION_TYPE.ENTREE) {
+        currentBalance += rising
+        setOnLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE, currentBalance, true)
     } else if (type === TRANSACTION_TYPE.SORTIE) {
         currentBalance -= rising
         setOnLocalStorage(LOCAL_STORAGE_KEYS.CURRENT_BALANCE, currentBalance, true)
@@ -63,15 +63,15 @@ const updateBalance = function (rising, type) {
 }
 
 //Ajoute un budget
-const addBudget = function (budget) {
+export const addBudget = function (budget) {
     setOnLocalStorage(LOCAL_STORAGE_KEYS.BUDGET, budget, true)
 }
 
 //Calcule les dépenses par mois
-const calculateExpenseOfMonth = function (){
+export const calculateExpenseOfMonth = function () {
 
-    const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-    const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+     const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+     const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
     let tradeOfMonth = getFromLocalStorage(LOCAL_STORAGE_KEYS.TRADING)
     let sorties = tradeOfMonth.filter(trade => trade.type === "sortie");
     sorties.forEach(sortie => {
@@ -82,7 +82,7 @@ const calculateExpenseOfMonth = function (){
     setOnLocalStorage(LOCAL_STORAGE_KEYS.EXPENSE_MONTH, expense_month || 0)
 }
 
-const sortTrades = function (trades, sort) {
+export const sortTrades = function (trades, sort) {
     let tradesSorted = []
     trades.forEach(trade => {
         if (trade.category.toLowerCase().includes(sort.toLowerCase())) {
@@ -92,7 +92,7 @@ const sortTrades = function (trades, sort) {
     return tradesSorted
 }
 
-const searchOnTrades = function (trades, contain){
+export const searchOnTrades = function (trades, contain) {
     let tradesSorted = []
     trades.forEach(trade => {
         if (trade.name.toLowerCase().includes(contain.toLowerCase())) {
